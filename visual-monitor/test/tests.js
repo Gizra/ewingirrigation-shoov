@@ -61,12 +61,26 @@ describe('Visual monitor testing', function() {
   it('should show the home page',function(done) {
     client
       .url(baseUrl)
+      .pause(2000)
       .webdrivercss(testName + '.homepage', {
         name: '1',
-        exclude: [],
+        exclude:
+          [
+            // Top carousel
+            '#my-slideshow',
+            //Featured Items
+            '.featured-products-internal li img',
+          ],
         remove: [],
-        hide: [],
-        screenWidth: selectedCaps == 'chrome' ? [640, 960, 1200] : undefined,
+        hide:
+          [
+            //Featured Items
+            '.featured-products-internal li h3',
+            '.featured-products-internal li .price-box',
+            '.featured-products-internal li .old-price',
+            '.featured-products-internal li .price-box',
+          ],
+        screenWidth: selectedCaps == 'chrome' ? [1200] : undefined,
       }, resultsCallback)
       .call(done);
   });
